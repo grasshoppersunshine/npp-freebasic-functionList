@@ -18,28 +18,31 @@
 		>
 			
 			<function
-				mainExpr="(^|:)[\t\x20]*((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+)"
+				mainExpr="(^|:)[\t\x20]*((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>))[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*$"
 			>
 				<functionName>
-					<nameExpr expr="[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+$" />
+					<nameExpr expr="((([\t\x20]+\.)?\w+)|([a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>)))[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*$" />
+					<nameExpr expr="((([\t\x20]+\.)?\w+)|([a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>)))" /> <!-- comment this line if you want to keep parameter list and return type -->
 				</functionName>
 				<className>
-					<nameExpr expr="\w+\." />
-					<nameExpr expr="\w+" />
+					<nameExpr expr="\w+\.[a-zA-Z_]+" />
+					<nameExpr expr="^\w+" />
 				</className>
 			</function>
 			
 			<classRange
-				mainExpr    ="(^|:)[\t\x20]*type[\t\x20]+\w+(.+?)\s+end[\t\x20]+type[\t\x20]*(?=\n|\Z)"
+				mainExpr    ="(^|:)[\t\x20]*type[\t\x20]+\w+([\t\x20]+(extends|field)|[\t\x20]*\n)(.+?)\s+end[\t\x20]+type[\t\x20]*$"
 			>
 				<className>
+					<nameExpr expr="(^|:)[\t\x20]*type[\t\x20]+\w+" />
 					<nameExpr expr="\w+$" />
 				</className>
 				<function
-					mainExpr="(^|:)[\t\x20]*declare[\t\x20]+((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+)[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*\n"
+					mainExpr="(^|:)[\t\x20]*declare[\t\x20]+((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>))[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*$"
 				>
 					<functionName>
-						<funcNameExpr expr="[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*\n" />
+						<funcNameExpr expr="((([\t\x20]+\.)?\w+)|([a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>)))[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*$" />
+						<funcNameExpr expr="((([\t\x20]+\.)?\w+)|([a-zA-Z]*\.?([=+\-\*/\!@#$^&amp;\\]+|\(\)|\[\]|&lt;>)))" /> <!-- comment this line if you want to keep parameter list and return type -->
 					</functionName>
 				</function>
 			</classRange>
