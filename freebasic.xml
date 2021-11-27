@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ==========================================================================\
+|
+|   To learn how to make your own language parser, please check the following
+|   link:
+|       https://npp-user-manual.org/docs/function-list/
+|
+\=========================================================================== -->
+<NotepadPlus>
+	<functionList>
+		<!-- ============================================================================ [ FreeBASIC ] -->
+		<!-- FreeBASIC - Free/Open Source (GPL), BASIC compiler for Microsoft Windows, DOS and Linux    -->
+
+		<parser
+			id         ="freebasic_syntax"
+			displayName="FreeBASIC - Free/Open Source (GPL), BASIC compiler for Microsoft Windows, DOS and Linux"
+			commentExpr="(rem\s+.*?)$"
+		>
+			
+			<function
+				mainExpr="(function|sub)\s+[a-zA-Z0-9_\.]+\s*\("
+			>
+				<functionName>
+					<nameExpr expr="[a-zA-Z0-9_\.]+\s*\(" />
+					<nameExpr expr="\w*\.*\w+" />
+					<nameExpr expr="(\w+)$" />
+				</functionName>
+				<className>
+					<nameExpr expr="\w+\." />
+					<nameExpr expr="\w+" />
+				</className>
+			</function>
+			
+			<classRange
+				mainExpr="type\s+\w+"
+			>
+				<className>
+					<nameExpr expr="\w+" />
+				</className>
+			</classRange>
+			
+		</parser>
+	</functionList>
+</NotepadPlus>
