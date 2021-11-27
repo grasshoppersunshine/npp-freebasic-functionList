@@ -18,12 +18,10 @@
 		>
 			
 			<function
-				mainExpr="(function|sub)\s+[a-zA-Z0-9_\.]+\s*\("
+				mainExpr="(^|:)[\t\x20]*((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+)"
 			>
 				<functionName>
-					<nameExpr expr="[a-zA-Z0-9_\.]+\s*\(" />
-					<nameExpr expr="\w*\.*\w+" />
-					<nameExpr expr="(\w+)$" />
+					<nameExpr expr="[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+$" />
 				</functionName>
 				<className>
 					<nameExpr expr="\w+\." />
@@ -32,11 +30,18 @@
 			</function>
 			
 			<classRange
-				mainExpr="type\s+\w+"
+				mainExpr    ="(^|:)[\t\x20]*type[\t\x20]+\w+(.+?)\s+end[\t\x20]+type[\t\x20]*(?=\n|\Z)"
 			>
 				<className>
-					<nameExpr expr="\w+" />
+					<nameExpr expr="\w+$" />
 				</className>
+				<function
+					mainExpr="(^|:)[\t\x20]*declare[\t\x20]+((sub|function|constructor|destructor|property)[\t\x20]+[a-zA-Z0-9_\.]+|operator[\t\x20]+[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+)[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*\n"
+				>
+					<functionName>
+						<funcNameExpr expr="[a-zA-Z0-9_\.=+\-\*/\!@#$^&amp;\(\)\[\]\\&lt;>]+[\t\x20]*\(.*?\)([\t\x20]+\w+)*[\t\x20]*\n" />
+					</functionName>
+				</function>
 			</classRange>
 			
 		</parser>
