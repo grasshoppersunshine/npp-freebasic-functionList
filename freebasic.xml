@@ -12,9 +12,9 @@
 		<!-- FreeBASIC - Free/Open Source (GPL), BASIC compiler for Microsoft Windows, DOS and Linux    -->
 
 		<parser
-			id         ="freebasic_syntax"
+			id         ="freebasic.xml"
 			displayName="FreeBASIC - Free/Open Source (GPL), BASIC compiler for Microsoft Windows, DOS and Linux"
-			commentExpr="(rem\s+.*?)$"
+			commentExpr="(?s:\x2F\x27.*?\x27\x2F)|(?mi-s:(\x27|REM\s+).*?$)"
 		>
 			
 			<function
